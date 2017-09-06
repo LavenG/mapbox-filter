@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id='map-box'></div>
+<nav id='filter-group' class='filter-group'></nav>
+
+<script src="token.js"> </script>
+<script src="points.js"> </script>
+<script>
+mapboxgl.accessToken = token;
+
+var filterGroup = document.getElementById('filter-group');
+var map = new mapboxgl.Map({
+    container: 'map-box',
+    style: 'mapbox://styles/mapbox/light-v9',
+    center: [-77.04, 38.907],
+    zoom: 11.10,
+});
+
+map.on('load', function() {
+    // Add a GeoJSON source containing place coordinates and information.
+    map.addSource("places", {
+        "type": "geojson",
+        "data": places
+    });
+
+    places.features.forEach(function(feature) {
+        var symbol = feature.properties['icon'];
+        var layerID = 'poi-' + symbol;
+
+        // Add a layer for this symbol type if it hasn't been added already.
+        if (!map.getLayer(layerID)) {
+            map.addLayer({
+                "id": layerID,
+                "type": "symbol",
+                "source": "places",
+                "layout": {
+                    "icon-image": symbol + "-15",
+                    "icon-allow-overlap": true
+                },
+                "filter": ["==", "icon", symbol]
+            });
+
+            // Add checkbox and label elements for the layer.
+            var input = document.createElement('input');
+            input.type = 'checkbox';
+            input.id = layerID;
+            input.checked = true;
+            filterGroup.appendChild(input);
+
+            var label = document.createElement('label');
+            label.setAttribute('for', layerID);
+            label.textContent = symbol;
+            filterGroup.appendChild(label);
+
+            // When the checkbox changes, update the visibility of the layer.
+            input.addEventListener('change', function(evt) {
+                map.setLayoutProperty(layerID, 'visibility',
+                    evt.target.checked ? 'visible' : 'none');
+            });
+        }
+    });
+});
+</script>
+
+</body>
+</html>

@@ -3,7 +3,8 @@ const places = {
     "features": [{
         "type": "Feature",
         "properties": {
-            "icon": "theatre"
+            "icon": "theatre",
+            "description": "<strong>A Little Night Music</strong><p>Production of Stephen Sondheim's</p>"
         },
         "geometry": {
             "type": "Point",
@@ -12,7 +13,8 @@ const places = {
     }, {
         "type": "Feature",
         "properties": {
-            "icon": "theatre"
+            "icon": "theatre",
+            "description": "<strong>Kodak Theatre</strong><p>The Arlington Players' production of Stephen Sondheim's</p>"
         },
         "geometry": {
             "type": "Point",
@@ -21,7 +23,8 @@ const places = {
     }, {
         "type": "Feature",
         "properties": {
-            "icon": "bar"
+            "icon": "bar",
+            "description": "<strong>The Imperial</strong><p> The best bar in town</p>"
         },
         "geometry": {
             "type": "Point",
@@ -30,7 +33,8 @@ const places = {
     }, {
         "type": "Feature",
         "properties": {
-            "icon": "bicycle"
+            "icon": "bicycle",
+            "description": "<strong>Gearhead</strong><p>Bike rental</p>"
         },
         "geometry": {
             "type": "Point",
@@ -39,7 +43,8 @@ const places = {
     }, {
         "type": "Feature",
         "properties": {
-            "icon": "music"
+            "icon": "music",
+            "description": "<strong>High Notes</strong><p>Well known live music location</p>"
         },
         "geometry": {
             "type": "Point",
@@ -48,7 +53,8 @@ const places = {
     }, {
         "type": "Feature",
         "properties": {
-            "icon": "music"
+            "icon": "music",
+            "description": "<strong>High Notes</strong><p>Well known live music location</p>"
         },
         "geometry": {
             "type": "Point",
@@ -57,7 +63,8 @@ const places = {
     }, {
         "type": "Feature",
         "properties": {
-            "icon": "music"
+            "icon": "music",
+            "description": "<strong>High Notes</strong><p>Well known live music location</p>"
         },
         "geometry": {
             "type": "Point",

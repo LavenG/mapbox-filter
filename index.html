@@ -50,6 +50,14 @@ map.on('load', function() {
                 "filter": ["==", "icon", symbol]
             });
 
+            var desc = feature.properties['description'];
+
+            map.addLayer({
+                "id": desc,
+                "type": "symbol",
+                "source": "places",
+            });
+
             // Add checkbox and label elements for the layer.
             var input = document.createElement('input');
             input.type = 'checkbox';
@@ -67,6 +75,28 @@ map.on('load', function() {
                 map.setLayoutProperty(layerID, 'visibility',
                     evt.target.checked ? 'visible' : 'none');
             });
+
+
+            // creates description pop up. when a click event occurs in the `layerID` layer
+            // open a pop up of the feature, 
+            map.on('click', layerID, function (event) {
+                new mapboxgl.Popup()
+                    .setLngLat(event.features[0].geometry.coordinates)
+                    .setHTML(event.features[0].properties.description)
+                    .addTo(map);
+            });
+            
+            
+            // changes mouse pointer when mose is on icon
+            map.on('mouseenter', layerID, function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            //changes mouse pointer back to normal when mouse leaves
+            map.on('mouseleave', layerID, function () {
+                map.getCanvas().style.cursor = '';
+            });
+
         }
     });
 });
